@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.andming.dao.AccountDao">
+
+
+    <select id="findAll" resultType="com.andming.domain.Account">
+        SELECT * FROM account
+    </select>
+
+    <select id="findOne" resultType="com.andming.domain.Account">
+        SELECT * FROM account WHERE id=#{id}
+    </select>
+
+    <insert id="add">
+        INSERT INTO account (NAME ,money) VALUES (#{name},#{money})
+    </insert>
+    <update id="updata">
+        UPDATE account set name=#{name},money=#{money} where id=#{id}
+    </update>
+    <delete id="del">
+        DELETE FROM account where id=#{id}
+    </delete>
+</mapper>

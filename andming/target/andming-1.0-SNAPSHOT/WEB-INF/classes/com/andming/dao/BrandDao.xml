@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.andming.dao.BrandDao">
+
+
+    <select id="findAll" resultType="com.andming.domain.TbBrand">
+        SELECT id,name,first_char firstChar FROM tb_brand
+    </select>
+
+    <select id="findOne" resultType="com.andming.domain.TbBrand">
+        SELECT id,name,first_char firstChar FROM tb_brand WHERE id=#{id}
+    </select>
+
+    <insert id="add">
+        INSERT INTO tb_brand (NAME ,first_char) VALUES (#{name},#{firstChar})
+    </insert>
+    <update id="updata">
+        UPDATE tb_brand set name=#{name},first_char=#{firstChar} where id=#{id}
+    </update>
+    <delete id="del">
+        DELETE FROM tb_brand where id=#{id}
+    </delete>
+</mapper>

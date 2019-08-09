@@ -1,0 +1,14 @@
+com\andming\domain\TbBrandExample$Criteria.class
+com\andming\domain\TbBrandExample.class
+com\andming\web\AccountController.class
+com\andming\domain\Account.class
+com\andming\web\BrandController.class
+com\andming\service\impl\BrandServiceImpl.class
+com\andming\dao\BrandDao.class
+com\andming\service\BrandService.class
+com\andming\domain\TbBrand.class
+com\andming\dao\AccountDao.class
+com\andming\service\AccountService.class
+com\andming\domain\TbBrandExample$GeneratedCriteria.class
+com\andming\service\impl\AccountServiceImpl.class
+com\andming\domain\TbBrandExample$Criterion.class

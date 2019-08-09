@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../js/qrious.js"></script>
+</head>
+<body>
+
+<img id="ewm">
+
+</body>
+<script>
+    var qr = window.qr = new QRious({
+        element: document.getElementById('ewm'),
+        size: 250,
+        value: '192.168.1.101:8080/admin/login.html',
+        level:'H'
+    })
+</script>
+
+
+</html>

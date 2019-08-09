@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/AiYou_parent.iml" filepath="$PROJECT_DIR$/AiYou_parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Aiyou_Utils/Aiyou_Utils.iml" filepath="$PROJECT_DIR$/Aiyou_Utils/Aiyou_Utils.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Aiyou_pojo/Aiyou_pojo.iml" filepath="$PROJECT_DIR$/Aiyou_pojo/Aiyou_pojo.iml" />
+    </modules>
+  </component>
+</project>

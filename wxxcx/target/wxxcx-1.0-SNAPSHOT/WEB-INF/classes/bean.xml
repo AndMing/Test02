@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <context:component-scan base-package="com.andming">
+
+    </context:component-scan>
+    <context:property-placeholder location="classpath:jdbc.properties"></context:property-placeholder>
+
+    <bean id="sessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"></property>
+
+        <!--配置分页的拦截器-->
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageInterceptor">
+                    <property name="properties">
+                        <props>
+                            <prop key="helperDialect">mysql</prop>
+                            <prop key="reasonable">true</prop>
+                        </props>
+                    </property>
+                </bean>
+            </array>
+        </property>
+
+    </bean>
+
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${jdbc.driver}"></property>
+        <property name="url" value="${jdbc.url}"></property>
+        <property name="username" value="${jdbc.username}"></property>
+        <property name="password" value="${jdbc.password}"></property>
+    </bean>
+
+    <bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.andming.dao"></property>
+    </bean>
+
+    <!--配置事务：事务都是基于AOP的-->
+    <!--配置事务管理器-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+
+    <!--配置事务的通知-->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <!--配置事务的属性-->
+        <tx:attributes>
+            <tx:method name="*" read-only="false" propagation="REQUIRED"/>
+            <tx:method name="find*" read-only="true" propagation="SUPPORTS"></tx:method>
+        </tx:attributes>
+    </tx:advice>
+
+    <!--配置切入点表达式以及它和事务通知的关联关系-->
+    <aop:config>
+        <!--配置切入点表达式-->
+        <aop:pointcut id="pt1" expression="execution(* com.andming.service.impl.*.*(..))"></aop:pointcut>
+        <!--建立关系-->
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="pt1"></aop:advisor>
+    </aop:config>
+
+</beans>
